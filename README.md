@@ -16,14 +16,14 @@ ODK XLSForm Offline is part of Open Data Kit (ODK), a free and open-source set o
 ## Prerequisites
 
 1. Install [Python 2.7](https://www.python.org/downloads/)
-	* If you are on Windows, you must install the 32 bit version.
+    * If you are on Windows, you must install the 32 bit version.
 1. Install Python packages: ``pip install pyinstaller wxpython pyxform``
-        * Until [pyxform/pull/166](https://github.com/XLSForm/pyxform/pull/166) is merged, uninstall the official version of pyxform, and install a branch that works with PyInstaller.
-	        * Uninstall offical: ``pip uninstall pyxform -y``
-	        * Install PyInstaller branch: ``pip install git+https://github.com/yanokwa/pyxform.git@pyinstaller-windows``
+    * Until [pyxform/pull/166](https://github.com/XLSForm/pyxform/pull/166) is merged, uninstall the official version of pyxform, and install a branch that works with PyInstaller.
+      * Uninstall offical: ``pip uninstall pyxform -y``
+      * Install PyInstaller branch: ``pip install git+https://github.com/yanokwa/pyxform.git@pyinstaller-windows``
 1. Install packaging utilities
-	* macOS: ``brew install unix2dos``
-	* Windows: [upx](https://upx.github.io/)
+    * macOS: ``brew install unix2dos``
+    * Windows: [upx](https://upx.github.io/)
 
 ## Run
 
@@ -31,7 +31,7 @@ To run the app, `python src/main.py`
 
 ## Package
 
-We package on macOS machine running a Windows 10 virtual machine. We share the `xlsform-offline` folder on the Mac with Windows, then mount that folder as the Z drive with `pushd "\\vmware-host\Shared Folders\xlsform-offline\"`.
+The easiest way to package, is to use a macOS machine running a Windows 10 virtual machine. Share the `xlsform-offline` folder on the Mac with Windows, then mount that folder as the Z drive with `pushd "\\vmware-host\Shared Folders\xlsform-offline\"`.
 
 1. In the macOS machine, run `./make-mac.sh` to build the Mac binary.
 1. In the Windows virtual machine, run `make-win.bat` to build the Windows binary.
