@@ -35,4 +35,4 @@ We package on macOS machine running a Windows 10 virtual machine. We share the `
 
 1. In the macOS machine, run `./make-mac.sh` to build the Mac binary.
 1. In the Windows virtual machine, run `make-win.bat` to build the Windows binary.
-1. Finally, in the macOS machine, run `./make-dist.sh`to zip up the Mac and Windows binaries.
+1. Finally, in the macOS machine, run `./make-dist.sh` to zip up the Mac and Windows binaries.
