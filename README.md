@@ -31,7 +31,7 @@ To run the app, `python src/main.py`
 
 ## Package
 
-The easiest way to package, is to use a macOS machine running a Windows 10 virtual machine. Share the `xlsform-offline` folder on the Mac with Windows, then mount that folder as the Z drive with `pushd "\\vmware-host\Shared Folders\xlsform-offline\"`.
+The easiest way to package is to use a macOS machine running a Windows 10 virtual machine. Share the `xlsform-offline` folder on the Mac with Windows, then mount that folder as the Z drive with `pushd "\\vmware-host\Shared Folders\xlsform-offline\"`.
 
 1. In the macOS machine, run `./make-mac.sh` to build the Mac binary.
 1. In the Windows virtual machine, run `make-win.bat` to build the Windows binary.
