@@ -18,8 +18,6 @@ ODK XLSForm Offline is part of Open Data Kit (ODK), a free and open-source set o
 1. Install [Python 2.7](https://www.python.org/downloads/)
 	* If you are on Windows, you must install the 32 bit version.
 1. Install Python packages: ``pip install pyinstaller wxpython pyxform``
-	* Until [pyxform/pull/166](https://github.com/XLSForm/pyxform/pull/166) is merged, install this copy of pyxform.
-	``pip uninstall pyxform -y; pip install git+https://github.com/yanokwa/pyxform.git@pyinstaller-windows``
 1. Install utilities
 	* macOS: ``brew install unix2dos``
 	* Windows: [upx](https://upx.github.io/)
