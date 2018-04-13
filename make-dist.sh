@@ -15,7 +15,7 @@ if [[ -e "$MAC_BINARY" ]]; then
 	echo 'Mac version exists';
 	fold -w 80 -s "$README" > "$MAC_README";
 	cd dist/mac;
-	zip -r9 "ODK-XLSForm-Offline-Mac-$VERSION.zip" . -x "*.DS_Store"
+	zip -r9 "ODK-XLSForm-Offline-macOS-$VERSION.zip" . -x "*.DS_Store"
 	cd ../..;
 fi
 
@@ -24,6 +24,6 @@ if [[ -e "$WIN_BINARY" ]]; then
 	fold -w 80 -s "$README" > "$WIN_README";
 	mac2unix "$WIN_README" && unix2dos "$WIN_README";
 	cd dist/win;
-	zip -r9 "ODK-XLSForm-Offline-Win-$VERSION.zip" . -x "*.DS_Store"
+	zip -r9 "ODK-XLSForm-Offline-Windows-$VERSION.zip" . -x "*.DS_Store"
 	cd ../..;
 fi
