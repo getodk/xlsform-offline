@@ -2,7 +2,7 @@
 
 import site;
 for path in site.getsitepackages():
-    test_path = os.path.join(path, 'pyxform/odk_validate/ODK_Validate.jar')
+    test_path = os.path.join(path, 'pyxform/validators/odk_validate/bin/ODK_Validate.jar')
     if os.path.exists(test_path):
         validate_path = test_path
 
@@ -17,7 +17,7 @@ exe = EXE(pyz,
 coll = COLLECT(exe,
                a.binaries,
                [('res/about.html', os.getcwd() + '/src/res/about.html', 'DATA')],
-               [('pyxform/odk_validate/ODK_Validate.jar', validate_path, 'DATA')],
+               [('pyxform/validators/odk_validate/bin/ODK_Validate.jar', validate_path, 'DATA')],
                name='ODK XLSForm Offline',
                strip=True
 )
