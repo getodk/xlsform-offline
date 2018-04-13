@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VERSION=$(grep Version src/res/about.html | sed -e 's|[[:space:]]*\(Version:\)[[:space:]]*\(.*\)$|\2|');
+VERSION=$(grep "TITLE = " src/main.py | sed -e "s|.*v\\(.*\\)'$|v\\1|")
 
 README='pkg/Read me.txt'
 
