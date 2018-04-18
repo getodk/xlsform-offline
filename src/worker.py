@@ -110,7 +110,7 @@ class Result(threading.Thread):
             # need a temp file because print_xform_to_file automatically creates the file
             temp_dir = tempfile.mkdtemp()
             survey.print_xform_to_file(temp_dir + str(os.path.sep) + self.file_name + '.xml', validate=self.validate,
-                                       warnings=warnings)
+                                       warnings=warnings, pretty_print=False)
 
             if has_external_choices(json_survey):
                 single_file = False
