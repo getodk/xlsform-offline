@@ -1,23 +1,2 @@
 
-
-## The 'Validate converted XForm with ODK Validate' option is disabled. How do I enable it?
-
-ODK Validate needs Java to be installed and available in your PATH. 
-
-If you don't have Java installed, download it from http://java.com/en/download.
-
-If after you install and reboot, you still cannot validate, it is likely you do not have Java in your PATH. Follow the instructions at http://java.com/en/download/help/path.xml to add Java to your PATH.
-
-
-
-## ODK XLSForm Offline.app cannot be opened. It says it is from an unidentified developer.
-
-This message is from Gatekeeper (http://support.apple.com/kb/HT5290), a feature in Mac OS X 10.7 and later that helps protect your Mac from malware and misbehaving apps downloaded from the Internet.
-
-To allow your Mac to run ODK XLSForm Offline.app, follow these three steps.
-
-1. In Finder, Control-click or right-click the ODK XLSForm Offline.app icon.
-2. Select Open from the top of contextual menu that appears.
-3. Click Open in the dialog box. If prompted, enter an administrator name and password.
-
-You only have to do this once. ODK XLSForm Offline.app will now run without the warning from Gatekeeper.
+Need help? Go to https://docs.opendatakit.org/xlsform
