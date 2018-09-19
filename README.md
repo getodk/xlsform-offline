@@ -21,8 +21,8 @@ ODK XLSForm Offline is part of Open Data Kit (ODK), a free and open-source set o
     * macOS/Windows: ``pip install pyinstaller wxpython pyxform``
     * Linux (Ubunut 16.04):
       - Uninstall older version of wxPython (as it is installed bydefault )  ```sudo pip uninstall wxPython```
-      - Uninstall older version of wxPython-common ```sudo pip uninstall wxPython-common```
-      - Simple ```pip install wxPython``` will not work as per this [post](https://stackoverflow.com/questions/47246947/not-able-to-install-new-wxpython) as it will generate compilation errors, thus, easiest way to install wxpython is by using command ```sudo pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-16.04 wxPython``` that has archives path.
+      - Also uninstall older version of wxPython-common ```sudo pip uninstall wxPython-common```
+      - Simple ```pip install wxPython``` will not work as per this [post](https://stackoverflow.com/questions/47246947/not-able-to-install-new-wxpython) as it will generate compilation errors, thus, easiest way to install wxpython is by using command ```sudo pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-16.04 wxPython``` that includes archive path.
 1. Install packaging utilities
     * macOS: ``brew install unix2dos``
     * Windows: [upx](https://upx.github.io/)
