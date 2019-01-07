@@ -14,7 +14,7 @@ import worker
 # TODO pull out all strings
 # TODO why is the first button selected
 
-TITLE = 'ODK XLSForm Offline v1.8.0'
+TITLE = 'ODK XLSForm Offline v1.8.1'
 
 APP_QUIT = 1
 APP_ABOUT = 2
