@@ -1,4 +1,4 @@
 # macOS: Use the default Python. virtualenvs will not work.
 pyinstaller==3.4.0
 wxpython==4.0.3
-pyxform==0.13.1
+pyxform==0.14.0
