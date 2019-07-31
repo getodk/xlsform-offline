@@ -62,7 +62,7 @@ OS_MAP = {
 class UpdateChecker(threading.Thread):
 
     def get_update_information(self):
-        response = requests.get(GITHUB_RELEASES_API)
+        response = requests.get(GITHUB_RELEASES_API, timeout=30)
         if response.status_code == 200:
             json_response = response.json()
             latest_version = json_response["tag_name"]
@@ -322,7 +322,7 @@ class MainFrame(wx.Frame):
         self.Centre()
         self.Show()
 
-        self.check_update_and_show()
+        threading.Thread(target=self.check_update_and_show, args=()).start()
 
     @staticmethod
     def shorten_string(string, max_length):
