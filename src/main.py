@@ -10,6 +10,7 @@ import subprocess
 
 import wx
 import worker
+import update_checker
 
 import requests
 from packaging import version
@@ -17,9 +18,8 @@ import threading
 
 # TODO pull out all strings
 # TODO why is the first button selected
-VERSION = 'v1.9.0'
+VERSION = 'v1.11.0'
 TITLE = 'ODK XLSForm Offline ' + VERSION
-GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
 
 APP_QUIT = 1
 APP_ABOUT = 2
@@ -52,55 +52,6 @@ if sys.platform == 'darwin':
 WORKER_FINISH = 'WORKER_FINISH'
 WORKER_PROGRESS = 'WORKER_PROGRESS'
 WORKER_PROGRESS_SLEEP = .05
-
-OS_MAP = {
-    'win32': 'windows',
-    'darwin': 'macos'
-}
-
-update_checker_event = wx.NewEventType()
-on_update_checker_done = wx.PyEventBinder(update_checker_event, 1)
-
-
-class UpdateCheckDoneEvent(wx.PyCommandEvent):
-    def __init__(self, etype, eid, value=None):
-        wx.PyCommandEvent.__init__(self, etype, eid)
-        self.update_info = value
-
-    def GetUpdateInfo(self):
-        return self.update_info
-
-
-class UpdateChecker(threading.Thread):
-    def __init__(self, parent):
-        threading.Thread.__init__(self)
-        self._parent = parent
-
-    def run(self):
-        response = requests.get(GITHUB_RELEASES_API, timeout=30)
-        if response.status_code == 200:
-            json_response = response.json()
-            latest_version = json_response["tag_name"]
-            print(latest_version)
-            if version.parse(latest_version[1:]) > version.parse(VERSION[1:]):
-                download_url = ''
-                download_name = ''
-                for asset in json_response['assets']:
-                    if OS_MAP[sys.platform] in asset['name'].lower():
-                        download_url = asset['browser_download_url']
-                        download_name = asset['name']
-                        break
-
-                wx.PostEvent(self._parent, UpdateCheckDoneEvent(update_checker_event, -1, {
-                    'update_available': True,
-                    'latest_version': latest_version,
-                    'download_url': download_url,
-                    'download_name': download_name
-                }))
-            else:
-                wx.PostEvent(self._parent, UpdateCheckDoneEvent(update_checker_event, -1, {
-                    'update_available': False
-                }))
 
 
 class UpdateAvailableFrame(wx.Frame):
@@ -338,8 +289,9 @@ class MainFrame(wx.Frame):
         self.Centre()
         self.Show()
 
-        self.Bind(on_update_checker_done, self.check_update_and_show)
-        UpdateChecker(self).start()
+        update_checker.evt_update_check_done(self, self.check_update_and_show)
+
+        update_checker.UpdateChecker(self, VERSION).start()
 
     @staticmethod
     def shorten_string(string, max_length):
@@ -412,6 +364,8 @@ class MainFrame(wx.Frame):
         self.Destroy()
         if self.about_window:
             self.about_window.Close()
+        if self.update_window:
+            self.update_window.Close()
 
     def on_about(self, e):
         if self.about_window:
@@ -440,9 +394,11 @@ class MainFrame(wx.Frame):
     def check_update_and_show(self, event):
         if self.update_window:
             self.update_window.Close()
-        self.update_window = UpdateAvailableFrame(None, event.GetUpdateInfo())
-        self.update_window.Centre()
-        self.update_window.Show()
+
+        if event.data['update_available']:
+            self.update_window = UpdateAvailableFrame(None, event.data)
+            self.update_window.Centre()
+            self.update_window.Show()
 
     @staticmethod
     def is_java_installed():
