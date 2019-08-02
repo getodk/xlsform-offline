@@ -17,7 +17,6 @@ import threading
 
 # TODO pull out all strings
 # TODO why is the first button selected
-
 TITLE = 'ODK XLSForm Offline'
 TITLE = 'ODK XLSForm Offline ' + VERSION
 GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
@@ -59,26 +58,11 @@ OS_MAP = {
     'darwin': 'macos'
 }
 
-update_checker_event = wx.NewEventType()
-on_update_checker_done = wx.PyEventBinder(update_checker_event, 1)
-
-
-class UpdateCheckDoneEvent(wx.PyCommandEvent):
-    def __init__(self, etype, eid, value=None):
-        wx.PyCommandEvent.__init__(self, etype, eid)
-        self.update_info = value
-
-    def GetUpdateInfo(self):
-        return self.update_info
-
 
 class UpdateChecker(threading.Thread):
-    def __init__(self, parent):
-        threading.Thread.__init__(self)
-        self._parent = parent
 
-    def run(self):
-        response = requests.get(GITHUB_RELEASES_API, timeout=30)
+    def get_update_information(self):
+        response = requests.get(GITHUB_RELEASES_API)
         if response.status_code == 200:
             json_response = response.json()
             latest_version = json_response["tag_name"]
@@ -90,18 +74,17 @@ class UpdateChecker(threading.Thread):
                     if OS_MAP[sys.platform] in asset['name'].lower():
                         download_url = asset['browser_download_url']
                         download_name = asset['name']
-                        break
 
-                wx.PostEvent(self._parent, UpdateCheckDoneEvent(update_checker_event, -1, {
+                return {
                     'update_available': True,
                     'latest_version': latest_version,
                     'download_url': download_url,
                     'download_name': download_name
-                }))
+                }
             else:
-                wx.PostEvent(self._parent, UpdateCheckDoneEvent(update_checker_event, -1, {
+                return {
                     'update_available': False
-                }))
+                }
 
 
 class UpdateAvailableFrame(wx.Frame):
@@ -339,8 +322,7 @@ class MainFrame(wx.Frame):
         self.Centre()
         self.Show()
 
-        self.Bind(on_update_checker_done, self.check_update_and_show)
-        UpdateChecker(self).start()
+        self.check_update_and_show()
 
     @staticmethod
     def shorten_string(string, max_length):
@@ -438,10 +420,12 @@ class MainFrame(wx.Frame):
         if self.result_thread is not None and self.result_thread.is_alive():
             self.status_gauge.Pulse()
 
-    def check_update_and_show(self, event):
+    def check_update_and_show(self):
+        update_info = UpdateChecker().get_update_information()
+
         if self.update_window:
             self.update_window.Close()
-        self.update_window = UpdateAvailableFrame(None, event.GetUpdateInfo())
+        self.update_window = UpdateAvailableFrame(None, update_info)
         self.update_window.Centre()
         self.update_window.Show()
 
