@@ -28,8 +28,8 @@ MAIN_WINDOW_WIDTH = 475
 MAIN_WINDOW_HEIGHT = 620
 ABOUT_WINDOW_WIDTH = 360
 ABOUT_WINDOW_HEIGHT = 335
-UPDATE_WINDOW_WIDTH = 330
-UPDATE_WINDOW_HEIGHT = 135
+UPDATE_WINDOW_WIDTH = 360
+UPDATE_WINDOW_HEIGHT = 335
 MAX_PATH_LENGTH = 45
 HEADER_SPACER = 6
 CHOOSE_BORDER = 5
@@ -41,8 +41,8 @@ if sys.platform == 'darwin':
     MAIN_WINDOW_HEIGHT = 750
     ABOUT_WINDOW_WIDTH = 360
     ABOUT_WINDOW_HEIGHT = 290
-    UPDATE_WINDOW_WIDTH = 330
-    UPDATE_WINDOW_HEIGHT = 100
+    UPDATE_WINDOW_WIDTH = 360
+    UPDATE_WINDOW_HEIGHT = 290
     MAX_PATH_LENGTH = 40
     HEADER_SPACER = 0
     CHOOSE_BORDER = 1
@@ -71,7 +71,7 @@ class UpdateAvailableFrame(wx.Frame):
         with open(update_html_path, 'r') as file:
             update_html_text = file.read()
 
-        filled_update_html_text = update_html_text.replace('@latest_version', update_info['latest_version']).replace(
+        filled_update_html_text = update_html_text.replace('@desc', update_info['update_desc']).replace(
             '@download_url', update_info['download_url']).replace('@download_name', update_info['download_name'])
 
         html.SetPage(filled_update_html_text)

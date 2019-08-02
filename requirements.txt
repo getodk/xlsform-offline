@@ -4,3 +4,4 @@ wxpython==4.0.3
 pyxform==0.14.0
 requests==2.22.0
 packaging==19.1
+markdown2==2.3.8

@@ -4,6 +4,7 @@ import sys
 import requests
 from packaging import version
 import threading
+import markdown2
 
 GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
 
@@ -56,11 +57,13 @@ class UpdateChecker(threading.Thread):
                         'update_available': True,
                         'latest_version': latest_version,
                         'download_url': download_url,
-                        'download_name': download_name
+                        'download_name': download_name,
+                        'update_desc': markdown2.markdown(json_response["body"].replace('\n', '<br/>'))
                     }))
                 else:
                     wx.PostEvent(self._parent, UpdateCheckDoneEvent({
                         'update_available': False
                     }))
         except Exception as ex:
+            print ex
             pass
