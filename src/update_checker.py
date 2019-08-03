@@ -43,7 +43,6 @@ class UpdateChecker(threading.Thread):
             if response.status_code == 200:
                 json_response = response.json()
                 latest_version = json_response["tag_name"]
-                print(latest_version)
                 if version.parse(latest_version[1:]) > version.parse(self._current_version[1:]):
                     download_url = ''
                     download_name = ''
