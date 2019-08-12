@@ -18,7 +18,7 @@ exe = EXE(pyz,
           [('pyxform\\validators\\odk_validate\\bin\\ODK_Validate.jar', validate_path, 'DATA')],
           [('pyxform\\iana_subtags.txt', iana_path, 'DATA')],
           name='ODK XLSForm Offline.exe',
-          icon='pkg\\icon.ico',
+          icon='icon.ico',
           upx=True,
           console=False
 )
