@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VERSION=$(grep "TITLE = " src/main.py | sed -e "s|.*v\\(.*\\)'$|v\\1|")
+VERSION=$(grep VERSION src/main.py | sed -e "s|.*'\(.*\)'|\1|")
 
 README='pkg/Read me.txt'
 

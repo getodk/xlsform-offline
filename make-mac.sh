@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VERSION=$(grep Version src/res/about.html | sed -e 's|[[:space:]]*\(Version:\)[[:space:]]*\(.*\)$|\2|');
+VERSION=$(grep VERSION src/main.py | sed -e "s|.*'\(.*\)'|\1|");
 BINARY='dist/mac/ODK XLSForm Offline.app';
 
 echo "Removing build and dist";
