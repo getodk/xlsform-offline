@@ -10,10 +10,14 @@ import subprocess
 
 import wx
 import worker
+import update_checker
+
+import requests
+from packaging import version
+import threading
 
 # TODO pull out all strings
 # TODO why is the first button selected
-
 TITLE = 'ODK XLSForm Offline'
 VERSION = 'v1.11.0'
 
@@ -24,6 +28,8 @@ MAIN_WINDOW_WIDTH = 475
 MAIN_WINDOW_HEIGHT = 620
 ABOUT_WINDOW_WIDTH = 360
 ABOUT_WINDOW_HEIGHT = 365
+UPDATE_WINDOW_WIDTH = 360
+UPDATE_WINDOW_HEIGHT = 365
 MAX_PATH_LENGTH = 45
 HEADER_SPACER = 6
 CHOOSE_BORDER = 5
@@ -35,6 +41,8 @@ if sys.platform == 'darwin':
     MAIN_WINDOW_HEIGHT = 750
     ABOUT_WINDOW_WIDTH = 360
     ABOUT_WINDOW_HEIGHT = 315
+    UPDATE_WINDOW_WIDTH = 360
+    UPDATE_WINDOW_HEIGHT = 315
     MAX_PATH_LENGTH = 40
     HEADER_SPACER = 0
     CHOOSE_BORDER = 1
@@ -46,6 +54,29 @@ WORKER_PROGRESS = 'WORKER_PROGRESS'
 WORKER_PROGRESS_SLEEP = .05
 
 
+class UpdateAvailableFrame(wx.Frame):
+    def __init__(self, parent, update_info):
+        wx.Frame.__init__(self, parent, wx.ID_ANY, title='Update ' + update_info['latest_version'] + ' available',
+                          size=(UPDATE_WINDOW_WIDTH, UPDATE_WINDOW_HEIGHT),
+                          style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
+        html = HtmlWindow(self)
+        html.SetStandardFonts()
+        update_html_path = ''
+        if getattr(sys, 'frozen', False):
+            update_html_path = os.path.join(sys._MEIPASS, 'res', 'update.html')
+        else:
+            update_html_path = os.path.join('src', 'res', 'update.html')
+
+        update_html_text = ''
+        with open(update_html_path, 'r') as file:
+            update_html_text = file.read()
+
+        filled_update_html_text = update_html_text.replace('@desc', update_info['update_desc']).replace(
+            '@download_url', update_info['download_url']).replace('@download_name', update_info['download_name'])
+
+        html.SetPage(filled_update_html_text)
+
+
 class AboutFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, wx.ID_ANY, title='About ' + TITLE,
@@ -53,7 +84,7 @@ class AboutFrame(wx.Frame):
                           style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
         html = HtmlWindow(self)
         html.SetStandardFonts()
-        about = os.path.join('res','about.html')
+        about = os.path.join('res', 'about.html')
         if getattr(sys, 'frozen', False):
             html.LoadPage(os.path.join(sys._MEIPASS, about))
         else:
@@ -82,6 +113,7 @@ class MainFrame(wx.Frame):
         self.progress_thread = None
 
         self.about_window = None
+        self.update_window = None
 
         self.menu_bar = wx.MenuBar()
         self.file_menu = wx.Menu()
@@ -223,6 +255,9 @@ class MainFrame(wx.Frame):
         self.Centre()
         self.Show()
 
+        update_checker.evt_update_check_done(self, self.check_update_and_show)
+        update_checker.UpdateChecker(self, VERSION).start()
+
     @staticmethod
     def shorten_string(string, max_length):
         if len(string) >= max_length:
@@ -291,6 +326,8 @@ class MainFrame(wx.Frame):
         self.Destroy()
         if self.about_window:
             self.about_window.Close()
+        if self.update_window:
+            self.update_window.Close()
 
     def on_about(self, e):
         if self.about_window:
@@ -315,6 +352,15 @@ class MainFrame(wx.Frame):
         if self.result_thread is not None and self.result_thread.isAlive():
             self.status_gauge.Pulse()
 
+    def check_update_and_show(self, event):
+        if self.update_window:
+            self.update_window.Close()
+
+        if event.data['update_available']:
+            self.update_window = UpdateAvailableFrame(None, event.data)
+            self.update_window.Centre()
+            self.update_window.Show()
+
     @staticmethod
     def is_java_installed():
 
@@ -334,7 +380,6 @@ class MainFrame(wx.Frame):
             pass
 
         return java_version and java_regex.match(java_version)
-
 
     def enable_ui(self, enable):
         # Turns UI elements on and off

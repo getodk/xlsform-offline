@@ -2,3 +2,6 @@
 pyinstaller==3.5.0
 wxpython==4.0.6
 pyxform==0.15.0
+requests==2.22.0
+packaging==19.1
+markdown2==2.3.8
