@@ -15,7 +15,7 @@ import worker
 # TODO why is the first button selected
 
 TITLE = 'ODK XLSForm Offline'
-VERSION = 'v1.11.0'
+VERSION = 'v1.11.1'
 
 APP_QUIT = 1
 APP_ABOUT = 2
