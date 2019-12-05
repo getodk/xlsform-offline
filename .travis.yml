@@ -5,10 +5,10 @@ os:
 dist: trusty
 
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install unix2dos
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install unix2dos; fi
   - pip install pyinstaller wxpython pyxform
 
 # Command to run tests
 script:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make-mac.sh
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make-mac.sh; fi
 # - if [ "$TRAVIS_OS_NAME" = "windwos" ]; then make-win.bat
