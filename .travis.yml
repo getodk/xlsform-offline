@@ -7,6 +7,9 @@ python:
 matrix:
   include:
     - os: osx
+      language: sh
+      python: "2.7"
+      # Perform the manual steps on osx to install python3 and activate venv
       before_install:
         - brew install unix2dos
         - pip install pyinstaller wxpython pyxform
@@ -19,6 +22,7 @@ matrix:
         - choco install python2 --params "/InstallDir:C:\\Python"
         - export PATH="/c/Python:/c/Python/Scripts:$PATH"
         - pip install pyinstaller
+        - pip install pyxform
       script:
         - ./make-win.bat
 
