@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - "2.7"
+
+os:
+  - osx
+# - windows
+
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install unix2dos
+  - pip install pyinstaller wxpython pyxform
+
+# Command to run tests
+script:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make-mac.sh
+# - if [ "$TRAVIS_OS_NAME" = "windwos" ]; then make-win.bat
