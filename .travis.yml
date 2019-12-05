@@ -10,5 +10,4 @@ before_install:
 
 # Command to run tests
 script:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./make-mac.sh; fi
-  - if [ "$TRAVIS_OS_NAME" != "osx" ]; then ./make-win.bat; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./make-mac.sh; else ./make-win.bat; fi
