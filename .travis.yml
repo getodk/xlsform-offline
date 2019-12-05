@@ -11,6 +11,7 @@ matrix:
       python: "2.7"
       # Perform the manual steps on osx to install python3 and activate venv
       before_install:
+        - brew update
         - brew install unix2dos
         - pip install pyinstaller wxpython pyxform
       script:
@@ -26,3 +27,4 @@ matrix:
       script:
         - ./make-win.bat
 
+cache: pip
