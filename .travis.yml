@@ -1,8 +1,5 @@
 os:
-  - osx
   - linux
-
-dist: trusty
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install unix2dos; fi
@@ -10,4 +7,5 @@ before_install:
 
 # Command to run tests
 script:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./make-mac.sh; else ./make-win.bat; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./make-win.bat; fi
+  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ./make-mac.sh; fi
