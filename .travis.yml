@@ -20,6 +20,7 @@ matrix:
       python: "2.x"
       before_install:
         - choco install python2 --params "/InstallDir:C:\\Python"
+        - pip install pyinstaller
         - export PATH="/c/Python:/c/Python/Scripts:$PATH"
       script:
         - ./make-win.bat
