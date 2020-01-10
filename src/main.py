@@ -11,14 +11,11 @@ import subprocess
 import wx
 import worker
 
-import requests
-from packaging import version
-import threading
+import update_checker
 
 # TODO pull out all strings
 # TODO why is the first button selected
 TITLE = 'ODK XLSForm Offline'
-TITLE = 'ODK XLSForm Offline ' + VERSION
 GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
 
 APP_QUIT = 1
@@ -53,6 +50,7 @@ WORKER_FINISH = 'WORKER_FINISH'
 WORKER_PROGRESS = 'WORKER_PROGRESS'
 WORKER_PROGRESS_SLEEP = .05
 
+<<<<<<< HEAD
 OS_MAP = {
     'win32': 'windows',
     'darwin': 'macos'
@@ -87,6 +85,8 @@ class UpdateChecker(threading.Thread):
                 }
 
 
+=======
+>>>>>>> Lightweight version of update checker
 class UpdateAvailableFrame(wx.Frame):
     def __init__(self, parent, update_info):
         wx.Frame.__init__(self, parent, wx.ID_ANY, title='Update ' + update_info['latest_version'] + ' available',
@@ -109,7 +109,6 @@ class UpdateAvailableFrame(wx.Frame):
 
         html.SetPage(filled_update_html_text)
 
-
 class AboutFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, wx.ID_ANY, title='About ' + TITLE,
@@ -117,7 +116,7 @@ class AboutFrame(wx.Frame):
                           style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
         html = HtmlWindow(self)
         html.SetStandardFonts()
-        about = os.path.join('res', 'about.html')
+        about = os.path.join('res','about.html')
         if getattr(sys, 'frozen', False):
             html.LoadPage(os.path.join(sys._MEIPASS, about))
         else:
@@ -146,7 +145,6 @@ class MainFrame(wx.Frame):
         self.progress_thread = None
 
         self.about_window = None
-        self.update_window = None
 
         self.menu_bar = wx.MenuBar()
         self.file_menu = wx.Menu()
@@ -154,6 +152,7 @@ class MainFrame(wx.Frame):
 
         self.quit_menu_item = wx.MenuItem(self.file_menu, APP_QUIT, '&Quit\tCtrl+Q')
         self.about_menu_item = wx.MenuItem(self.help_menu, APP_ABOUT, '&About ' + TITLE)
+        self.update_window = None
 
         self.file_menu.Append(self.quit_menu_item)
         self.help_menu.Append(self.about_menu_item)
@@ -411,6 +410,7 @@ class MainFrame(wx.Frame):
             pass
 
         return java_version and java_regex.match(java_version)
+
 
     def enable_ui(self, enable):
         # Turns UI elements on and off
