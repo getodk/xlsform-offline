@@ -16,6 +16,7 @@ import update_checker
 # TODO pull out all strings
 # TODO why is the first button selected
 TITLE = 'ODK XLSForm Offline'
+
 GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
 
 APP_QUIT = 1
@@ -24,9 +25,9 @@ APP_ABOUT = 2
 MAIN_WINDOW_WIDTH = 475
 MAIN_WINDOW_HEIGHT = 620
 ABOUT_WINDOW_WIDTH = 360
-ABOUT_WINDOW_HEIGHT = 335
+ABOUT_WINDOW_HEIGHT = 365
 UPDATE_WINDOW_WIDTH = 360
-UPDATE_WINDOW_HEIGHT = 335
+UPDATE_WINDOW_HEIGHT = 365
 MAX_PATH_LENGTH = 45
 HEADER_SPACER = 6
 CHOOSE_BORDER = 5
@@ -37,9 +38,9 @@ if sys.platform == 'darwin':
     MAIN_WINDOW_WIDTH = 500
     MAIN_WINDOW_HEIGHT = 750
     ABOUT_WINDOW_WIDTH = 360
-    ABOUT_WINDOW_HEIGHT = 290
+    ABOUT_WINDOW_HEIGHT = 315
     UPDATE_WINDOW_WIDTH = 360
-    UPDATE_WINDOW_HEIGHT = 290
+    UPDATE_WINDOW_HEIGHT = 315
     MAX_PATH_LENGTH = 40
     HEADER_SPACER = 0
     CHOOSE_BORDER = 1
@@ -50,43 +51,6 @@ WORKER_FINISH = 'WORKER_FINISH'
 WORKER_PROGRESS = 'WORKER_PROGRESS'
 WORKER_PROGRESS_SLEEP = .05
 
-<<<<<<< HEAD
-OS_MAP = {
-    'win32': 'windows',
-    'darwin': 'macos'
-}
-
-
-class UpdateChecker(threading.Thread):
-
-    def get_update_information(self):
-        response = requests.get(GITHUB_RELEASES_API)
-        if response.status_code == 200:
-            json_response = response.json()
-            latest_version = json_response["tag_name"]
-            print(latest_version)
-            if version.parse(latest_version[1:]) > version.parse(VERSION[1:]):
-                download_url = ''
-                download_name = ''
-                for asset in json_response['assets']:
-                    if OS_MAP[sys.platform] in asset['name'].lower():
-                        download_url = asset['browser_download_url']
-                        download_name = asset['name']
-
-                return {
-                    'update_available': True,
-                    'latest_version': latest_version,
-                    'download_url': download_url,
-                    'download_name': download_name
-                }
-            else:
-                return {
-                    'update_available': False
-                }
-
-
-=======
->>>>>>> Lightweight version of update checker
 class UpdateAvailableFrame(wx.Frame):
     def __init__(self, parent, update_info):
         wx.Frame.__init__(self, parent, wx.ID_ANY, title='Update ' + update_info['latest_version'] + ' available',
@@ -358,6 +322,8 @@ class MainFrame(wx.Frame):
         self.Destroy()
         if self.about_window:
             self.about_window.Close()
+        if self.update_window:
+            self.update_window.Close()
 
     def on_about(self, e):
         if self.about_window:
@@ -382,14 +348,14 @@ class MainFrame(wx.Frame):
         if self.result_thread is not None and self.result_thread.is_alive():
             self.status_gauge.Pulse()
 
-    def check_update_and_show(self):
-        update_info = UpdateChecker().get_update_information()
-
+    def check_update_and_show(self, event):
         if self.update_window:
             self.update_window.Close()
-        self.update_window = UpdateAvailableFrame(None, update_info)
-        self.update_window.Centre()
-        self.update_window.Show()
+
+        if event.data['update_available']:
+            self.update_window = UpdateAvailableFrame(None, event.data)
+            self.update_window.Centre()
+            self.update_window.Show()
 
     @staticmethod
     def is_java_installed():
