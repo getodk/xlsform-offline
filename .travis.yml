@@ -7,6 +7,7 @@ python:
 addons:
   artifacts: true
   s3_region: "us-west-2"
+  debug: true
 
 matrix:
   include:
