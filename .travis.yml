@@ -4,6 +4,10 @@ dist: xenial
 python:
   - "2.7"
 
+addons:
+  artifacts: true
+  s3_region: "us-west-1"
+
 matrix:
   include:
     - os: osx
