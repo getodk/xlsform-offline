@@ -7,8 +7,6 @@ python:
 addons:
   artifacts:
     paths: "./dist/"
-    target_paths:
-      - /shouryaj/build_try2/
     debug: true
 
 matrix:
