@@ -6,16 +6,7 @@ python:
 
 addons:
   artifacts:
-    target_paths:
-      - /shouryaj/build_try/
     debug: true
-
-# deploy:
-#   provider: s3
-#   access_key_id: "AKIAYFYLJQQ3IDE3SV36"
-#   secret_access_key: "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"
-#   bucket: "S3 Bucket"
-#   skip_cleanup: true
 
 matrix:
   include:
