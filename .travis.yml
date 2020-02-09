@@ -5,8 +5,6 @@ python:
   - "2.7"
 
 addons:
-  artifacts: true
-  s3_region: "us-west-2"
   target_paths:
     - /shouryaj/build_try/
   debug: true
