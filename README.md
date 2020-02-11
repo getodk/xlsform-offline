@@ -2,6 +2,7 @@
 ![Platform](https://img.shields.io/badge/platform-Python-blue.svg)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Slack status](http://slack.opendatakit.org/badge.svg)](http://slack.opendatakit.org)
+![Build status](https://travis-ci.com/shouryaj/xlsform-offline.svg?branch=master)
 
 ODK XLSForm Offline is a Windows and macOS application for converting an XLSForm into an XForm that is compliant with the [ODK XForms spec](http://opendatakit.github.io/xforms-spec). Once converted, the application also validates that the XForm will run perfectly with all ODK tools.
    
