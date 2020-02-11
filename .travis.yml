@@ -7,8 +7,8 @@ python:
 addons:
   artifacts:
     paths:
-      - "./dist/mac/ODK-XLSForm-Offline-macOS-*"
-      - "ODK-XLSForm-Offline-Windows-*"
+      - "./dist/mac/ODK-XLSForm-Offline-macOS-\*"
+      - "ODK-XLSForm-Offline-Windows-\*"
     debug: true
 
 matrix:
