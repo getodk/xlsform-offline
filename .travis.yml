@@ -7,7 +7,7 @@ python:
 addons:
   artifacts:
     paths:
-      - ./dist/mac/ODK-XLSForm-Offline-macOS-*
+      - ./dist/mac/ODK XLSForm Offline.app
       - ./dist/win
     debug: true
 
@@ -22,7 +22,6 @@ matrix:
         - pip install pyinstaller wxpython pyxform
       script:
         - ./make-mac.sh
-        - ./make-dist.sh
     - os: windows
       language: sh
       python: "2.x"
@@ -33,6 +32,5 @@ matrix:
         - pip install pyxform
       script:
         - ./make-win.bat
-        - ./make-dist.sh
 
 cache: pip
