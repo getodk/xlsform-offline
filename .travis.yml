@@ -7,7 +7,7 @@ python:
 addons:
   artifacts:
     paths:
-      - ./dist/mac/*
+      - ./dist/mac/ODK-XLSForm-Offline-macOS.zip
       - ./dist/win
     target_paths:
       - ${TRAVIS_BUILD_NUMBER}
