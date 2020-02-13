@@ -7,10 +7,10 @@ python:
 addons:
   artifacts:
     paths:
-      - ./dist/mac/ODK-XLSForm-Offline-macOS.zip
+      - ./dist/mac/ODK-XLSForm-Offline-macOS-$(*)
       - ./dist/win
     target_paths:
-      - ${TRAVIS_REPO_SLUG}_${TRAVIS_BUILD_NUMBER}_${TRAVIS_JOB_NUMBER}
+      - ${TRAVIS_BUILD_NUMBER}
     debug: true
 
 matrix:
