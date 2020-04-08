@@ -1,39 +1,62 @@
 language: python
 dist: xenial
+env:
+  global:
+  - BINARY_VERSION=$(git describe --tags --dirty --always)
 
-python:
-  - "2.7"
-
-addons:
-  artifacts:
-    paths:
-      - ./dist/mac/ODK-XLSForm-Offline-macOS.zip
-      - ./dist/win
-    target_paths:
-      - ${TRAVIS_BUILD_NUMBER}
-    debug: true
-
-matrix:
+jobs:
   include:
-    - os: osx
+    - stage: Build binaries
+      os: osx
       language: sh
-      python: "2.7"
+      python: 
+        - "3.6"
       before_install:
         - brew update
         - brew install unix2dos
-        - pip install pyinstaller wxpython pyxform
+        - pip3 install pyinstaller wxpython pyxform
       script:
         - ./make-mac.sh
-        - ./make-dist.sh
+      workspaces:
+        create:
+          name: mac-binaries
+          paths:
+            - ./dist/mac/ODK-XLSForm-Offline.app
     - os: windows
       language: sh
-      python: "2.x"
+      python: 
+        - "3.6"
       before_install:
-        - choco install python2 --params "/InstallDir:C:\\Python"
+        - choco install python3 --params "/InstallDir:C:\\Python"
         - export PATH="/c/Python:/c/Python/Scripts:$PATH"
-        - pip install pyinstaller
-        - pip install pyxform
+        - pip3 install pyinstaller
+        - pip3 install pyxform
       script:
         - ./make-win.bat
+      workspaces:
+        create:
+          name: windows-binaries
+          paths: 
+            - ./dist/win/ODK-XLSForm-Offline.exe
+    - stage: Deploy
+      os: osx
+      language: sh
+      workspaces:
+        use:
+          - mac-binaries
+          - windows-binaries
+      before_install:
+        - brew update
+        - brew install unix2dos
+      script:
+        - ./make-dist.sh
+      addons:
+        artifacts:
+          paths:
+            - ./dist/mac/ODK-XLSForm-Offline-macOS-${BINARY_VERSION}.zip
+            - ./dist/win/ODK-XLSForm-Offline-Windows-${BINARY_VERSION}.zip
+          target_paths:
+            - ${TRAVIS_BUILD_NUMBER}
+          debug: true
 
 cache: pip
