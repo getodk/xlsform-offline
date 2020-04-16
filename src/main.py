@@ -312,7 +312,7 @@ class MainFrame(wx.Frame):
             self.status_text_ctrl.AppendText(event.data)
 
     def on_progress(self, event):
-        if self.result_thread is not None and self.result_thread.isAlive():
+        if self.result_thread is not None and self.result_thread.is_alive():
             self.status_gauge.Pulse()
 
     @staticmethod
@@ -325,7 +325,7 @@ class MainFrame(wx.Frame):
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
         java_version = None
-        java_regex = re.compile('(java|openjdk) version')
+        java_regex = re.compile(b'(java|openjdk) version')
         try:
             java_version = subprocess.Popen(['java', '-version'], stderr=subprocess.PIPE, stdin=subprocess.PIPE,
                                             stdout=subprocess.PIPE, shell=False, startupinfo=startupinfo).communicate()[
