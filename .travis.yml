@@ -13,7 +13,7 @@ jobs:
         - "3.6"
       before_install:
         - brew update
-        - brew install unix2dos
+        - brew install upx
         - pip3 install pyinstaller wxpython pyxform
       script:
         - ./make-mac.sh
@@ -56,7 +56,7 @@ jobs:
             - ./dist/mac/ODK-XLSForm-Offline-macOS-${BINARY_VERSION}.zip
             - ./dist/win/ODK-XLSForm-Offline-Windows-${BINARY_VERSION}.zip
           target_paths:
-            - ${TRAVIS_BUILD_NUMBER}
+            - /
           debug: true
 
 cache: pip
