@@ -10,23 +10,30 @@ for path in site.getsitepackages():
         iana_path = test_iana_path
 
 a = Analysis(['../src/main.py'])
-pyz = PYZ(a.pure)
+pyz = PYZ(a.pure, a.zipped_data)
 exe = EXE(pyz,
           a.scripts,
+          [],
           exclude_binaries=True,
           name='ODK XLSForm Offline',
-          console=False
-)
+          debug=False,
+          bootloader_ignore_signals=False,
+          strip=False,
+          upx=True,
+          console=False )
 coll = COLLECT(exe,
                a.binaries,
+               a.zipfiles,
+               a.datas,
                [('res/about.html', os.getcwd() + '/src/res/about.html', 'DATA')],
                [('pyxform/validators/odk_validate/bin/ODK_Validate.jar', validate_path, 'DATA')],
                [('pyxform/iana_subtags.txt', iana_path, 'DATA')],
-               name='ODK XLSForm Offline',
-               strip=True
-)
+               strip=False,
+               upx=True,
+               upx_exclude=[],
+               name='ODK XLSForm Offline')
 app = BUNDLE(coll,
-             name='ODK XLSForm Offline.app',
+             name='ODK-XLSForm-Offline.app',
              icon='icon.icns',
-             info_plist={ 'NSHighResolutionCapable': 'True' }
-)
+             info_plist={ 'NSHighResolutionCapable': 'True' },
+             bundle_identifier=None)

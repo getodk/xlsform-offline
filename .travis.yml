@@ -1,0 +1,62 @@
+language: python
+dist: xenial
+env:
+  global:
+  - BINARY_VERSION=$(git describe --tags --dirty --always)
+
+jobs:
+  include:
+    - stage: Build binaries
+      os: osx
+      language: sh
+      python: 
+        - "3.6"
+      before_install:
+        - brew update
+        - brew install unix2dos
+        - pip3 install pyinstaller wxpython pyxform
+      script:
+        - ./make-mac.sh
+      workspaces:
+        create:
+          name: mac-binaries
+          paths:
+            - ./dist/mac/ODK-XLSForm-Offline.app
+    - os: windows
+      language: sh
+      python: 
+        - "3.6"
+      before_install:
+        - choco install python3 --params "/InstallDir:C:\\Python"
+        - export PATH="/c/Python:/c/Python/Scripts:$PATH"
+        - pip3 install pyinstaller
+        - pip3 install pyxform
+      script:
+        - ./make-win.bat
+      workspaces:
+        create:
+          name: windows-binaries
+          paths: 
+            - ./dist/win/ODK-XLSForm-Offline.exe
+    - stage: Deploy
+      os: osx
+      language: sh
+      workspaces:
+        use:
+          - mac-binaries
+          - windows-binaries
+      before_install:
+        - brew update
+        - brew install unix2dos
+      script:
+        - ./make-dist.sh
+      addons:
+        artifacts:
+          paths:
+            - ./dist/mac/ODK-XLSForm-Offline-macOS-${BINARY_VERSION}.zip
+            - ./dist/win/ODK-XLSForm-Offline-Windows-${BINARY_VERSION}.zip
+          target_paths:
+            - ${TRAVIS_BUILD_NUMBER}
+          debug: true
+
+cache: pip
