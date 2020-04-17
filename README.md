@@ -30,7 +30,7 @@ To run the app, `python src/main.py`
 
 ## Automated packaging
 
-[Travis](https://travis-ci.com/) will automatically build all of this repo's branches and place the binaries here:
+[Travis](https://travis-ci.com/) will automatically build all of this repo's branches and place the binaries here for 30 days.
 
 * Mac: https://travis.opendatakit.org/dist/mac/ODK-XLSForm-Offline-macOS-{GIT_HASH}.zip
 * Windows: https://travis.opendatakit.org/dist/win/ODK-XLSForm-Offline-Windows-{GIT_HASH}.zip
