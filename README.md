@@ -48,3 +48,7 @@ The easiest way to do manual packaging is to use a macOS machine running a Windo
 1. In the Windows VM, run `make-win.bat` to build the Windows binary.
 1. Copy the resulting binaries into the `dist/mac` and `dist/win` folders on the host machine.
 1. On the host machine, run `./make-dist.sh` to zip up the Mac and Windows binaries.
+
+## Releases
+
+Before releasing a version, be sure to update the version in src/res/about.html

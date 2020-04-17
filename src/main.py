@@ -15,7 +15,6 @@ import worker
 # TODO why is the first button selected
 
 TITLE = 'ODK XLSForm Offline'
-VERSION = 'v2.0.0'
 
 APP_QUIT = 1
 APP_ABOUT = 2
@@ -347,6 +346,6 @@ class MainFrame(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App()
-    app.SetAppName(TITLE + " " + VERSION)
+    app.SetAppName(TITLE)
     MainFrame(None, title=TITLE)
     app.MainLoop()
