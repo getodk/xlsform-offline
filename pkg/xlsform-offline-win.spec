@@ -23,6 +23,6 @@ exe = EXE(pyz,
           [('pyxform\\iana_subtags.txt', iana_path, 'DATA')],
           name='ODK-XLSForm-Offline.exe',
           icon='icon.ico',
-          upx=True,
+          upx=False,
           console=False
 )
