@@ -1,18 +1,16 @@
 # ODK XLSForm Offline
 ![Platform](https://img.shields.io/badge/platform-Python-blue.svg)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Slack status](http://slack.opendatakit.org/badge.svg)](http://slack.opendatakit.org)
-[![Build status](https://api.travis-ci.org/opendatakit/xlsform-offline.svg?branch=master)](https://travis-ci.org/github/opendatakit/xlsform-offline)
+[![Slack status](http://slack.getodk.org/badge.svg)](http://slack.getodk.org)
+[![Build status](https://api.travis-ci.org/getodk/xlsform-offline.svg?branch=master)](https://travis-ci.org/github/getodk/xlsform-offline)
 
-ODK XLSForm Offline is a Windows and macOS application for converting an XLSForm into an XForm that is compliant with the [ODK XForms spec](http://opendatakit.github.io/xforms-spec). Once converted, the application also validates that the XForm will run perfectly with all ODK tools.
+ODK XLSForm Offline is a Windows and macOS application for converting an XLSForm into an XForm that is compliant with the [ODK XForms spec](http://getodk.github.io/xforms-spec). Once converted, the application also validates that the XForm will run perfectly with all ODK tools.
    
-ODK XLSForm Offline is part of Open Data Kit (ODK), a free and open-source set of tools which help organizations author, field, and manage mobile data collection solutions. Learn more about the Open Data Kit project and its history [here](https://opendatakit.org/about/) and read about example ODK deployments [here](https://opendatakit.org/about/deployments/).
+ODK XLSForm Offline is part of Open Data Kit (ODK), a free and open-source set of tools which help organizations author, field, and manage mobile data collection solutions. Learn more about the Open Data Kit project and its history [here](https://getodk.org/about/) and read about example ODK deployments [here](https://getodk.org/about/deployments/).
 
-* ODK website: [https://opendatakit.org](https://opendatakit.org)
-* ODK forum: [https://forum.opendatakit.org](https://forum.opendatakit.org)
-* ODK developer Slack chat: [http://slack.opendatakit.org](http://slack.opendatakit.org) 
-* ODK developer Slack archive: [http://opendatakit.slackarchive.io](http://opendatakit.slackarchive.io) 
-* ODK developer wiki: [https://github.com/opendatakit/opendatakit/wiki](https://github.com/opendatakit/opendatakit/wiki)
+* ODK website: [https://getodk.org](https://getodk.org)
+* ODK forum: [https://forum.getodk.org](https://forum.getodk.org)
+* ODK developer Slack chat: [http://slack.getodk.org](http://slack.getodk.org) 
 
 ## Prerequisites
 
@@ -32,8 +30,8 @@ To run the app, `python src/main.py`
 
 [Travis](https://travis-ci.com/) will automatically build all of this repo's branches and place the binaries here for 30 days.
 
-* Mac: https://travis.opendatakit.org/dist/mac/ODK-XLSForm-Offline-macOS-{GIT_HASH}.zip
-* Windows: https://travis.opendatakit.org/dist/win/ODK-XLSForm-Offline-Windows-{GIT_HASH}.zip
+* Mac: https://travis.getodk.org/dist/mac/ODK-XLSForm-Offline-macOS-{GIT_HASH}.zip
+* Windows: https://travis.getodk.org/dist/win/ODK-XLSForm-Offline-Windows-{GIT_HASH}.zip
 
 `{GIT_HASH}` should be replaced with the output of the command:
 ```shell 
