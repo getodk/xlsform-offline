@@ -50,13 +50,15 @@ jobs:
         - brew install unix2dos
       script:
         - ./make-dist.sh
+        - mv ./dist/mac/ODK-XLSForm-Offline-macOS-${BINARY_VERSION}.zip .
+        - mv ./dist/win/ODK-XLSForm-Offline-Windows-${BINARY_VERSION}.zip .
       addons:
         artifacts:
           paths:
-            - ./dist/mac/ODK-XLSForm-Offline-macOS-${BINARY_VERSION}.zip
-            - ./dist/win/ODK-XLSForm-Offline-Windows-${BINARY_VERSION}.zip
+            - ./ODK-XLSForm-Offline-macOS-${BINARY_VERSION}.zip
+            - ./ODK-XLSForm-Offline-Windows-${BINARY_VERSION}.zip
           target_paths:
-            - /
+            - /xlsform-offline/
           debug: true
 
 cache: pip

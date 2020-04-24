@@ -30,8 +30,8 @@ To run the app, `python src/main.py`
 
 [Travis](https://travis-ci.com/) will automatically build all of this repo's branches and place the binaries here for 30 days.
 
-* Mac: https://travis.getodk.org/dist/mac/ODK-XLSForm-Offline-macOS-{GIT_HASH}.zip
-* Windows: https://travis.getodk.org/dist/win/ODK-XLSForm-Offline-Windows-{GIT_HASH}.zip
+* Mac: https://travis.getodk.org/xlsform-offline/ODK-XLSForm-Offline-macOS-{GIT_HASH}.zip
+* Windows: https://travis.getodk.org/xlsform-offline/ODK-XLSForm-Offline-Windows-{GIT_HASH}.zip
 
 `{GIT_HASH}` should be replaced with the output of the command:
 ```shell 
