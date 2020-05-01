@@ -17,7 +17,7 @@ import update_checker
 # TODO why is the first button selected
 TITLE = 'ODK XLSForm Offline'
 
-GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
+VERSION = "2.0.0"
 
 APP_QUIT = 1
 APP_ABOUT = 2
@@ -80,11 +80,20 @@ class AboutFrame(wx.Frame):
                           style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX)
         html = HtmlWindow(self)
         html.SetStandardFonts()
-        about = os.path.join('res','about.html')
+        about_html_path = os.path.join('res','about.html')
+
         if getattr(sys, 'frozen', False):
-            html.LoadPage(os.path.join(sys._MEIPASS, about))
+            about_html_path = os.path.join(sys._MEIPASS, about_html_path)
         else:
-            html.LoadPage(os.path.join('src', about))
+            about_html_path = os.path.join('src', about_html_path)
+
+        about_html_text = ''
+        with open(about_html_path, 'r') as file:
+            about_html_text = file.read()
+
+        filled_about_html_text = about_html_text.replace('@version', VERSION)
+
+        html.SetPage(filled_about_html_text)
 
 
 class HtmlWindow(wx.html.HtmlWindow):
@@ -252,6 +261,7 @@ class MainFrame(wx.Frame):
         self.Show()
 
         update_checker.evt_update_check_done(self, self.check_update_and_show)
+        print("CHECKING FOR UPDATE")
         update_checker.UpdateChecker(self, VERSION).start()
 
     @staticmethod

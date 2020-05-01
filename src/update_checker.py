@@ -1,10 +1,9 @@
 import wx
 import sys
 
-from packaging import version
 import threading
 import json
-import urllib2
+import urllib
 
 GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
 GITHUB_MARKDOWN_API = "https://api.github.com/markdown/raw"
@@ -40,11 +39,11 @@ class UpdateChecker(threading.Thread):
 
     def run(self):
         try:
-            response = urllib2.urlopen(GITHUB_RELEASES_API)
+            response = urllib.request.urlopen(GITHUB_RELEASES_API)
             if response.getcode() == 200:
                 json_response = json.load(response)
                 latest_version = json_response["tag_name"]
-                if version.parse(latest_version[1:]) > version.parse(self._current_version[1:]):
+                if latest_version[1:] > self._current_version:
                     download_url = ''
                     download_name = ''
                     for asset in json_response['assets']:
@@ -54,10 +53,11 @@ class UpdateChecker(threading.Thread):
                             break
 
                     # second request is for markdown conversion 
-                    data = json_response["body"]
-                    request = urllib2.Request(url=GITHUB_MARKDOWN_API, headers={'Content-Type': 'text/plain'}, data=data)
-                    res = urllib2.urlopen(request)
-                    html_body = res.read()
+                    data = json_response["body"].encode('utf-8')
+                    headers = {'Content-Type': 'text/plain'}
+
+                    request = urllib.request.Request(url=GITHUB_MARKDOWN_API, data=data, headers=headers)
+                    html_body = urllib.request.urlopen(request).read().decode('utf-8')
 
                     wx.PostEvent(self._parent, UpdateCheckDoneEvent({
                         'update_available': True,

@@ -3,4 +3,3 @@
 pyinstaller
 wxpython
 pyxform
-packaging
