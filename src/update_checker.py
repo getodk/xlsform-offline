@@ -5,7 +5,7 @@ import threading
 import json
 import urllib
 
-GITHUB_RELEASES_API = "https://api.github.com/repos/opendatakit/xlsform-offline/releases/latest"
+GITHUB_RELEASES_API = "https://api.github.com/repos/getodk/xlsform-offline/releases/latest"
 GITHUB_MARKDOWN_API = "https://api.github.com/markdown/raw"
 
 OS_MAP = {

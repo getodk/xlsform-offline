@@ -261,7 +261,6 @@ class MainFrame(wx.Frame):
         self.Show()
 
         update_checker.evt_update_check_done(self, self.check_update_and_show)
-        print("CHECKING FOR UPDATE")
         update_checker.UpdateChecker(self, VERSION).start()
 
     @staticmethod
