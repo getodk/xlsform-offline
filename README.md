@@ -1,16 +1,16 @@
 # ODK XLSForm Offline
 ![Platform](https://img.shields.io/badge/platform-Python-blue.svg)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Slack status](http://slack.getodk.org/badge.svg)](http://slack.getodk.org)
 [![Build status](https://api.travis-ci.org/getodk/xlsform-offline.svg?branch=master)](https://travis-ci.org/github/getodk/xlsform-offline)
+[![Slack](https://img.shields.io/badge/chat-on%20slack-brightgreen)](https://slack.getodk.org)
 
 ODK XLSForm Offline is a Windows and macOS application for converting an XLSForm into an XForm that is compliant with the [ODK XForms spec](http://getodk.github.io/xforms-spec). Once converted, the application also validates that the XForm will run perfectly with all ODK tools.
    
-ODK XLSForm Offline is part of Open Data Kit (ODK), a free and open-source set of tools which help organizations author, field, and manage mobile data collection solutions. Learn more about the Open Data Kit project and its history [here](https://getodk.org/about/) and read about example ODK deployments [here](https://getodk.org/about/deployments/).
+ODK XLSForm Offline is part of ODK, a free and open-source set of tools which help organizations author, field, and manage mobile data collection solutions. Learn more about the ODK project and its history [here](https://getodk.org/about/) and read about example ODK deployments [here](https://getodk.org/about/deployments/).
 
 * ODK website: [https://getodk.org](https://getodk.org)
 * ODK forum: [https://forum.getodk.org](https://forum.getodk.org)
-* ODK developer Slack chat: [http://slack.getodk.org](http://slack.getodk.org) 
+* ODK developer Slack chat: [https://slack.getodk.org](https://slack.getodk.org)
 
 ## Prerequisites
 
