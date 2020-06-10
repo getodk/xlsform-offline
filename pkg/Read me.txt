@@ -1,2 +1,2 @@
 
-Need help? Go to https://docs.opendatakit.org/xlsform
+Need help? Go to https://docs.getodk.org/xlsform
