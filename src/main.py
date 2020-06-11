@@ -17,7 +17,7 @@ import update_checker
 # TODO why is the first button selected
 TITLE = 'ODK XLSForm Offline'
 
-VERSION = "2.0.0"
+VERSION = "1.0.0"
 
 APP_QUIT = 1
 APP_ABOUT = 2
