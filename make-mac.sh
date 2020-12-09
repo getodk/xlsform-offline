@@ -9,4 +9,4 @@ rm -rf dist/mac;
 find . -name '*.pyc' -type f -delete;
 
 echo "Creating new build";
-pyinstaller pkg/xlsform-offline-mac.spec --distpath $(pwd)/dist/mac  --onefile --windowed --noconfirm --clean;
+~/.local/bin/pyinstaller pkg/xlsform-offline-mac.spec --distpath $(pwd)/dist/mac  --onefile --windowed --noconfirm --clean;
