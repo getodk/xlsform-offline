@@ -1,4 +1,8 @@
-# ODK XLSForm Offline
+## ⚠️ ODK XLSForm Offline is no longer being updated. Please use [ODK XLSForm Online](https://github.com/getodk/xlsform-online) or [pyxform](https://github.com/xlsform/pyxform) instead. ⚠️
+
+We are no longer doing active maintenance on ODK Aggregate. The recommended replacement is [XLSForm Online](https://github.com/getodk/central). Central is fast, actively-developed, and addresses many of the issues that users have had with Aggregate over the years. Fixes and small improvements to Aggregate are welcome, but please discuss in an issue or [on the forum](https://forum.getodk.org/c/development/5) first to make sure that a reviewer will be available.
+
+## Overview
 ![Platform](https://img.shields.io/badge/platform-Python-blue.svg)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build status](https://api.travis-ci.org/getodk/xlsform-offline.svg?branch=master)](https://travis-ci.org/github/getodk/xlsform-offline)
