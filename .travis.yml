@@ -14,7 +14,7 @@ jobs:
       before_install:
         - brew update
         - brew install upx
-        - pip3 install -r ${TRAVIS_BUILD_DIR}/requirements.txt
+        - pip3 install -r ${TRAVIS_BUILD_DIR}/requirements.txt --user
       script:
         - ./make-mac.sh
       workspaces:
@@ -30,7 +30,7 @@ jobs:
         - choco install python3 --params "/InstallDir:C:\\Python"
         - choco install upx --params "/InstallDir:C:\\upx"
         - export PATH="/c/Python:/c/Python/Scripts:/c/upx:$PATH"
-        - pip3 install -r ${TRAVIS_BUILD_DIR}/requirements.txt
+        - pip3 install -r ${TRAVIS_BUILD_DIR}/requirements.txt --user
       script:
         - ./make-win.bat
       workspaces:
